@@ -1,7 +1,11 @@
 import { IsNotEmpty, IsString, Length } from "class-validator";
-import { CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 export class CreateRoleDto {
+    
+    @PrimaryGeneratedColumn()
+    id: number;
+
     @IsNotEmpty()
     @Length(4, 15)
     @IsString()

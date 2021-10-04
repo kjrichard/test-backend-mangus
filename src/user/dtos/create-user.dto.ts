@@ -12,9 +12,9 @@ export class CreateUserDto {
     @IsString()
     pass: string;
 
-    @IsNumberString()
+  
     @IsNotEmpty()
-    roleid: number;
+    roleId: number;
 
     @CreateDateColumn({ name: 'created_at' }) 'created_at': Date;
     @UpdateDateColumn({ name: 'updated_at' }) 'updated_at': Date;

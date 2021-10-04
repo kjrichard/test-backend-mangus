@@ -12,6 +12,6 @@ export class Role {
     @Column({ type: 'bool', default: true })
     status: boolean;
 
-    @OneToMany(() => User, (user) => user.role)
-    users: User[];
+    @OneToMany(() => User, user => user.role)
+    user: User[];
 }

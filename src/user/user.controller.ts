@@ -18,7 +18,13 @@ export class UserController {
     async createOne( @Body() dto: CreateUserDto ) {
         console.log(dto);
         
-        const data = await this.userService.createOne( dto );
+        const data = await this.userService.createOne({
+            username: dto.username,
+            pass: dto.pass,
+            roleId: dto.roleId,
+            created_at: dto.created_at,
+            updated_at: dto.updated_at
+        } );
         return { data }
     }
 }

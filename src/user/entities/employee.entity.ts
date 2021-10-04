@@ -14,9 +14,6 @@ export class Employee {
 
     @Column({ type: "varchar", length: 15 })
     address : string;
-
-    @Column({ type: 'varchar', length: 20, nullable: false, select: false })
-    pass: string;
     
     @ManyToOne(() => User, user => user.employees)
     user: User; 
