@@ -1,18 +1,19 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class model1633393712182 implements MigrationInterface {
-    name = 'model1633393712182'
+export class model1633405492626 implements MigrationInterface {
+    name = 'model1633405492626'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE \`roles\` (\`id\` int NOT NULL AUTO_INCREMENT, \`description\` varchar(15) NOT NULL, \`status\` tinyint NOT NULL DEFAULT 1, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`users\` (\`id\` int NOT NULL AUTO_INCREMENT, \`username\` varchar(15) NOT NULL, \`pass\` varchar(20) NOT NULL, \`created_at\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updated_at\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`roleId\` int NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`clients\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(15) NOT NULL, \`lastname\` varchar(15) NOT NULL, \`address\` varchar(15) NOT NULL, \`pass\` varchar(20) NOT NULL, \`userId\` int NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
-        await queryRunner.query(`CREATE TABLE \`employees\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(15) NOT NULL, \`lastname\` varchar(15) NOT NULL, \`address\` varchar(15) NOT NULL, \`status\` tinyint NOT NULL DEFAULT 1, \`userId\` int NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`employees\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(15) NOT NULL, \`lastname\` varchar(15) NOT NULL, \`address\` varchar(15) NOT NULL, \`phone\` varchar(15) NOT NULL, \`status\` tinyint NOT NULL DEFAULT 1, \`userId\` int NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`ALTER TABLE \`users\` DROP COLUMN \`updated_at\``);
         await queryRunner.query(`ALTER TABLE \`clients\` DROP COLUMN \`pass\``);
         await queryRunner.query(`ALTER TABLE \`users\` ADD \`updated_at\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)`);
         await queryRunner.query(`ALTER TABLE \`clients\` ADD \`pass\` varchar(20) NOT NULL`);
         await queryRunner.query(`ALTER TABLE \`users\` ADD \`status\` tinyint NOT NULL DEFAULT 1`);
+        await queryRunner.query(`ALTER TABLE \`clients\` ADD \`phone\` varchar(15) NOT NULL`);
         await queryRunner.query(`ALTER TABLE \`clients\` ADD \`status\` tinyint NOT NULL DEFAULT 1`);
         await queryRunner.query(`ALTER TABLE \`users\` DROP COLUMN \`pass\``);
         await queryRunner.query(`ALTER TABLE \`users\` ADD \`pass\` varchar(128) NOT NULL`);
@@ -28,6 +29,7 @@ export class model1633393712182 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE \`users\` DROP COLUMN \`pass\``);
         await queryRunner.query(`ALTER TABLE \`users\` ADD \`pass\` varchar(20) NOT NULL`);
         await queryRunner.query(`ALTER TABLE \`clients\` DROP COLUMN \`status\``);
+        await queryRunner.query(`ALTER TABLE \`clients\` DROP COLUMN \`phone\``);
         await queryRunner.query(`ALTER TABLE \`users\` DROP COLUMN \`status\``);
         await queryRunner.query(`ALTER TABLE \`clients\` DROP COLUMN \`pass\``);
         await queryRunner.query(`ALTER TABLE \`users\` DROP COLUMN \`updated_at\``);

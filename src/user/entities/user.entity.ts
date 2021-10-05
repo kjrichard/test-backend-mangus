@@ -15,7 +15,7 @@ export class User {
     username : string;
 
     @Column({ type: 'varchar', length: 128, nullable: false, select: false })
-    pass: string;
+    password: string;
 
     @CreateDateColumn({ name: 'created_at' }) 'created_at': Date;
 

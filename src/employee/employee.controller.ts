@@ -13,14 +13,7 @@ export class EmployeeController {
         if(!data)  throw new NotFoundException( 'El usuario no existe' );
         return {  data }
     }
-
-    @Get()
-    async getMany( ) {
-        const data = await this.employeeService.getMany();
-        if( !data )  throw new NotFoundException( 'No hay registros' );
-        return {  data }
-    }
-
+    
     @Post()
     async createOne( @Body() dto: CreateEmployeeDto ) {
         const data = await this.employeeService.createOne(dto);
@@ -34,7 +27,7 @@ export class EmployeeController {
     }
 
     @Put( 'delete/:id' )
-    async deleteOne( @Param( 'id' ) id: number ) {
+    async deleteOne( @Param( 'id' ) id: number, @Body() status ) {
         let data = await this.employeeService.deleteEmployee(id);
         return { data }
     } 

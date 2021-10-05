@@ -22,6 +22,11 @@ export class CreateEmployeeDto {
     address : string;
 
     @IsNotEmpty()
+    @Length(4, 15)
+    @IsString()
+    phone : string;
+
+    @IsNotEmpty()
     user: any;
 
 

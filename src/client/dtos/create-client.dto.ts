@@ -26,6 +26,8 @@ export class CreateClientDto {
     @IsString()
     phone : string;
 
-
+    @IsNotEmpty()
+    user: any;
+    
     @CreateDateColumn({ name: 'created_at' }) 'created_at': Date;
 }

@@ -15,6 +15,9 @@ export class Employee {
     @Column({ type: "varchar", length: 15 })
     address : string;
 
+    @Column({ type: "varchar", length: 15 })
+    phone : string;
+
     @Column({ type: 'bool', default: true })
     status: boolean;
     
