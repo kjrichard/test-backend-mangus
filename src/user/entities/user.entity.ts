@@ -1,10 +1,9 @@
 
 import { IsNotEmpty, IsNumberString, IsString, Length } from "class-validator";
 import { Role } from "./role.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Client } from "./client.entity";
 import { Employee } from "./employee.entity";
-import { hash } from "bcrypt";
 
 
 
@@ -19,24 +18,20 @@ export class User {
     pass: string;
 
     @CreateDateColumn({ name: 'created_at' }) 'created_at': Date;
-    @UpdateDateColumn({ name: 'updated_at' }) 'updated_at': Date;
 
-   
+    @Column({ type: 'bool', default: true })
+    status: boolean;
 
     @ManyToOne(() => Role, role => role.user)
-    role: Role;
+    role: Role; 
+  
 
     @OneToMany(() => Client, client => client.user)
     clients: Client[];
 
     @OneToMany(() => Employee, employee => employee.user)
     employees: Employee[]; 
-    async hashPassword() {
-      if (!this.pass) {
-        return;
-      }
-      this.pass = await hash(this.pass, 10);
-    }
+    
   
 
 }

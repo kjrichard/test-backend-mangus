@@ -17,6 +17,9 @@ export class Client {
 
     @Column({ type: "varchar", length: 15 })
     address : string;
+
+    @Column({ type: 'bool', default: true })
+    status: boolean;
     
     @ManyToOne(() => User, user => user.clients)
     user: User;

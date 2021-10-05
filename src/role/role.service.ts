@@ -17,7 +17,7 @@ export class RoleService {
    }
   
    async getMany(): Promise<Role[]> {
-        const roles = await this.roleRepository.find()
+        const roles = await this.roleRepository.find({ relations: ['user', 'user.role']})
         return roles;
     }
 

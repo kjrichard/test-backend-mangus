@@ -1,4 +1,5 @@
-import { Body, Controller, Get, NotFoundException, Post } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { EditUserDto } from './dtos';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserService } from './user.service';
 
@@ -8,23 +9,26 @@ export class UserController {
     @Get()
     async getMany( ) {
         const data = await this.userService.getMany();
-        console.log(data);
-        
         if( !data )  throw new NotFoundException( 'No hay registros' );
         return {  data }
     }
 
     @Post()
     async createOne( @Body() dto: CreateUserDto ) {
-        console.log(dto);
-        
-        const data = await this.userService.createOne({
-            username: dto.username,
-            pass: dto.pass,
-            roleId: dto.roleId,
-            created_at: dto.created_at,
-            updated_at: dto.updated_at
-        } );
+        const data = await this.userService.createOne(dto);
+        return { data }
+    }
+
+    @Put( ':id' )
+    async updateOne( @Param( 'id' ) id: number, @Body() dto: EditUserDto ) {
+        let data = await this.userService.updateUser(id, dto);
+        return { data }
+    }
+
+    @Put( 'delete/:id' )
+    async deleteOne( @Param( 'id' ) id: number, @Body() status ) {
+        let data = await this.userService.deleteUser(id);
         return { data }
     }
 }
+

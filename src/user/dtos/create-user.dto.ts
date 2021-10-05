@@ -10,11 +10,10 @@ export class CreateUserDto {
     @IsNotEmpty()
     @Length(6, 10)
     @IsString()
-    pass: string;
+    pass: string; 
 
-  
     @IsNotEmpty()
-    roleId: number;
+    role: any;
 
     @CreateDateColumn({ name: 'created_at' }) 'created_at': Date;
     @UpdateDateColumn({ name: 'updated_at' }) 'updated_at': Date;

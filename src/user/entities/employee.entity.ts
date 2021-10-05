@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user.entity";
 
 @Entity('employees')
@@ -14,6 +14,9 @@ export class Employee {
 
     @Column({ type: "varchar", length: 15 })
     address : string;
+
+    @Column({ type: 'bool', default: true })
+    status: boolean;
     
     @ManyToOne(() => User, user => user.employees)
     user: User; 
