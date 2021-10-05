@@ -11,9 +11,8 @@ export class RoleService {
         private readonly roleRepository: Repository<Role>
     ) {}
    async getOne(id: number): Promise<Role> {
-    const role = await this.roleRepository.findOne( id )
-        return role;
-       
+    const role = await this.roleRepository.findOne( {id, status:true}, { relations: ['user', 'user.role']})
+        return role;   
    }
   
    async getMany(): Promise<Role[]> {
@@ -26,10 +25,11 @@ export class RoleService {
        return await this.roleRepository.save( data );
     }
 
-    async deleteRole( id: number): Promise<Role> {
-        const deleteRole = await this.getOne( id );
-        if(!deleteRole)  throw new NotFoundException( 'El rol no existe' );
-        return await this.roleRepository.remove(deleteRole);
+    async deleteOne( id: number ): Promise<Role> {
+        const DeleteRole = await this.getOne( id );
+        DeleteRole.status = false;
+        const deleted = Object.assign(DeleteRole);
+        return await this.roleRepository.save( deleted );
     }
 
     async updateRole(id: number, dto: CreateRoleDto ): Promise<Role> {

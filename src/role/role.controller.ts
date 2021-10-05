@@ -35,10 +35,9 @@ export class RoleController {
         return { data }
     }
 
-    @Delete( ':id' )
-    async deleteOne( @Param( 'id' ) id: number ) {
-        let data;
-        data = await this.roleService.deleteRole(id);
+    @Put( 'delete/:id' )
+    async deleteOne( @Param( 'id' ) id: number, @Body() status ) {
+        let data = await this.roleService.deleteOne(id);
         return { data }
-    } 
+    }
 }

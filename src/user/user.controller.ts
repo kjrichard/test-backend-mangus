@@ -1,4 +1,4 @@
-import { Body, Controller, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { EditUserDto } from './dtos';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserService } from './user.service';
@@ -6,6 +6,14 @@ import { UserService } from './user.service';
 @Controller('user')
 export class UserController {
     constructor(  private readonly userService: UserService ) {}
+    
+    @Get(':id')
+    async getOne( @Param( 'id', ParseIntPipe ) id: number ) {
+        const data = await this.userService.getOne( id );
+        if(!data)  throw new NotFoundException( 'El usuario no existe' );
+        return {  data }
+    }
+
     @Get()
     async getMany( ) {
         const data = await this.userService.getMany();

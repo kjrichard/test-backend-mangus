@@ -24,8 +24,8 @@ export class UserService {
     }
 
     async getOne(id: number): Promise<User> {
-        const user = await this.userRepository.findOne( id )
-        return user;
+        const user = await this.userRepository.findOne( {id, status:true}, { relations: ['role']})
+        return user;   
            
        }
     async createOne( dto: CreateUserDto ){
