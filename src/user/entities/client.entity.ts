@@ -1,5 +1,4 @@
-import { IsNotEmpty, IsNumberString, IsString, Length } from "class-validator";
-import { Role } from "./role.entity";
+
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user.entity";
 
@@ -23,6 +22,9 @@ export class Client {
 
     @Column({ type: 'bool', default: true })
     status: boolean;
+
+    @CreateDateColumn({ name: 'created_at' }) 'created_at': Date;
+    @CreateDateColumn({ name: 'update_up' }) 'update_up': Date;
     
     @ManyToOne(() => User, user => user.clients)
     user: User;

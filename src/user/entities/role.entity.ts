@@ -12,6 +12,9 @@ export class Role {
     @Column({ type: 'bool', default: true })
     status: boolean;
 
+    @CreateDateColumn({ name: 'created_at' }) 'created_at': Date;
+    @CreateDateColumn({ name: 'update_up' }) 'update_up': Date;
+
     @OneToMany(() => User, user => user.role)
     user: User[];
   

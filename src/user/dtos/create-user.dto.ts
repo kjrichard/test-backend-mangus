@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsNumberString, IsString, Length } from "class-validator";
-import { CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { CreateDateColumn } from "typeorm";
 
 export class CreateUserDto {
     @IsNotEmpty()
@@ -10,7 +10,7 @@ export class CreateUserDto {
     @IsNotEmpty()
     @Length(6, 10)
     @IsString()
-    password: string; 
+    pass: string; 
 
     @IsNotEmpty()
     role: any;

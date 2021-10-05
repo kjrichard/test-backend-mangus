@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, Length } from "class-validator";
-import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
 
 export class CreateEmployeeDto {
     

@@ -15,16 +15,16 @@ export class User {
     username : string;
 
     @Column({ type: 'varchar', length: 128, nullable: false, select: false })
-    password: string;
-
-    @CreateDateColumn({ name: 'created_at' }) 'created_at': Date;
+    pass: string;
 
     @Column({ type: 'bool', default: true })
     status: boolean;
 
+    @CreateDateColumn({ name: 'created_at' }) 'created_at': Date;
+    @CreateDateColumn({ name: 'update_up' }) 'update_up': Date;
+
     @ManyToOne(() => Role, role => role.user)
     role: Role; 
-  
 
     @OneToMany(() => Client, client => client.user)
     clients: Client[];
@@ -32,6 +32,4 @@ export class User {
     @OneToMany(() => Employee, employee => employee.user)
     employees: Employee[]; 
     
-  
-
 }
